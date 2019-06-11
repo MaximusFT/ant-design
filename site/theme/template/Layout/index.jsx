@@ -7,11 +7,8 @@ import 'moment/locale/zh-cn';
 import { LocaleProvider } from 'antd';
 import LogRocket from 'logrocket';
 import setupLogRocketReact from 'logrocket-react';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
 import Header from './Header';
-import enLocale from '../../en-US';
-import cnLocale from '../../zh-CN';
-import * as utils from '../utils';
+import { locales, DEFAULT_LOCALE } from '../../i18n';
 
 if (typeof window !== 'undefined' && navigator.serviceWorker) {
   navigator.serviceWorker.getRegistrations().then(registrations => {
@@ -60,8 +57,7 @@ export default class Layout extends React.Component {
 
   constructor(props) {
     super(props);
-    const { pathname } = props.location;
-    const appLocale = utils.isZhCN(pathname) ? cnLocale : enLocale;
+    const appLocale = locales[DEFAULT_LOCALE];
     addLocaleData(appLocale.data);
 
     this.state = {
@@ -109,11 +105,16 @@ export default class Layout extends React.Component {
   render() {
     const { children, ...restProps } = this.props;
     const { appLocale } = this.state;
+    console.log('%c @@@--->>> appLocale', 'background: #369; color: #fff', appLocale); // prettier-ignore
 
     // Temp remove SentryBoundary
     return (
-      <IntlProvider locale={appLocale.locale} messages={appLocale.messages}>
-        <LocaleProvider locale={appLocale.locale === 'zh-CN' ? zhCN : null}>
+      <IntlProvider
+        textComponent={React.Fragment}
+        locale={appLocale.locale}
+        messages={appLocale.messages}
+      >
+        <LocaleProvider locale={appLocale.localeProvider}>
           <div className="page-wrapper">
             <Header {...restProps} />
             {children}

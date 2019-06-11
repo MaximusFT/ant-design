@@ -144,6 +144,17 @@ export default class Header extends React.Component {
         <FormattedMessage id="app.header.lang" />
       </Button>,
       <Select
+        key="language"
+        className="language"
+        size="small"
+        dropdownMatchSelectWidth={false}
+        defaultValue={antdVersion}
+        onChange={this.handleVersionChange}
+        getPopupContainer={trigger => trigger.parentNode}
+      >
+        {versionOptions}
+      </Select>,
+      <Select
         key="version"
         className="version"
         size="small"
