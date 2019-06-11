@@ -19,13 +19,13 @@ addLocaleData(enLocaleData);
 addLocaleData(cnLocaleData);
 addLocaleData(ruLocaleData);
 
-const DEFAULT_LOCALE = 'en';
+const DEFAULT_LOCALE = 'en-US';
 
 // prettier-ignore
 const appLocales = [
-  'en',
-  'cn',
-  'ru',
+  'en-US',
+  'zh-CN',
+  'ru-RU',
 ];
 
 const formatTranslationMessages = (locale, messages) => {
@@ -42,17 +42,17 @@ const formatTranslationMessages = (locale, messages) => {
 };
 
 const locales = {
-  en: {
+  'en-US': {
     ...enTranslationMessages,
     localeProvider: enUS,
     messages: formatTranslationMessages('en', enTranslationMessages.messages),
   },
-  cn: {
+  'zh-CN': {
     ...cnTranslationMessages,
     localeProvider: zhCN,
     messages: formatTranslationMessages('cn', cnTranslationMessages.messages),
   },
-  ru: {
+  'ru-RU': {
     ...ruTranslationMessages,
     localeProvider: ruRU,
     messages: formatTranslationMessages('ru', ruTranslationMessages.messages),
@@ -75,9 +75,9 @@ exports.FormattedMessage = props => {
 };
 exports.appLocales = appLocales;
 exports.appLocalesSelect = {
-  en: { id: 'LocaleToggle.en' },
-  cn: { id: 'LocaleToggle.cn' },
-  ru: { id: 'LocaleToggle.ru' },
+  'en-US': { id: 'LocaleToggle.en' },
+  'zh-CN': { id: 'LocaleToggle.cn' },
+  'ru-RU': { id: 'LocaleToggle.ru' },
 };
 exports.formatTranslationMessages = formatTranslationMessages;
 exports.locales = locales;
